@@ -1,14 +1,28 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Ionic 
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div *ngIf="isAllowed">
+    <p>SMS Allowed</p>
+    <button ion-button block (click)="sendSms()">Process SMS</button>
+    <ion-list>
+
+      <ion-item *ngFor="let message of messages">
+        <ion-avatar item-start>{{message.id}}</ion-avatar>
+        <h2>{{message.number}}</h2>
+        <p>
+          {{message.message}}
+        </p>
+        <p item-end>{{message.status}}</p>
+        <!-- <button ion-button *ngIf="message.status!='pending'" clear item-end>View</button> -->
+      </ion-item>
+      
+    </ion-list>
+  </div>
+  <p *ngIf="!isAllowed">SMS Not Allowed</p>
 </ion-content>
